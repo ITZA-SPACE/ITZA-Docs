@@ -5,7 +5,7 @@ import { icons } from "./icons.mjs";
 
 const LOGO = readFileSync(new URL("./logo-inner.txt", import.meta.url), "utf8");
 const FONT = "Familjen Grotesk, DM Sans, Helvetica Neue, Helvetica, Arial, sans-serif";
-export const HEAD = 150;
+export const HEAD = 200;
 const INK = "#F5F5FA", INK2 = "#B4B4C8", INK3 = "#8C8CA6", RIM = "#8A8FA8", CARD = "#0B1226", PILL = "#0A0F22";
 export const COL = {
   space: "#2F7BFF", rain: "#7FD0FF", green: "#34E0A1", amber: "#FFC857", violet: "#8B6BFF",
@@ -38,6 +38,15 @@ export class Lanes {
       `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="26" fill="${color}" fill-opacity=".05" stroke="${color}" stroke-width="3" stroke-dasharray="14 10"/>` +
         `<text x="${x + tx}" y="${y + 40}" font-size="27" font-weight="700" fill="${INK}">${esc(title)}</text>` +
         (sub ? `<text x="${x + tx}" y="${y + 70}" font-size="17" fill="${INK2}">${esc(sub)}</text>` : ""),
+    );
+  }
+  /** Zone = solid frame around lanes that share a side of the system (client, server, third-party). */
+  zone(x, y, w, h, label, sub, color) {
+    this.zones = this.zones || [];
+    this.zones.push(
+      `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="34" fill="${color}" fill-opacity=".035" stroke="${color}" stroke-width="5"/>` +
+        `<text x="${x + 26}" y="${y + 36}" font-size="26" font-weight="800" fill="${color}" letter-spacing="2">${esc(label)}</text>` +
+        `<text x="${x + 26 + label.length * 17.5 + 24}" y="${y + 36}" font-size="18" fill="${INK2}">${esc(sub)}</text>`,
     );
   }
   /** Card: lines = [title, ...sublines]. icon = {gcp:name}|{icon:name,arg}. */
@@ -111,7 +120,7 @@ export class Lanes {
     s += `<svg x="40" y="38" width="318" height="92" viewBox="0 0 94 27.1997" fill="none">${LOGO}</svg>`;
     s += `<text x="${this.W - 40}" y="84" font-size="42" font-weight="700" fill="${INK}" text-anchor="end">${esc(this.title)}</text>`;
     s += `<text x="${this.W - 40}" y="120" font-size="19" fill="${INK2}" text-anchor="end">${esc(this.subtitle)}</text>`;
-    s += `<g transform="translate(0 ${HEAD})">${this.parts.join("")}${this.over.join("")}</g></svg>`;
+    s += `<g transform="translate(0 ${HEAD})">${(this.zones || []).join("")}${this.parts.join("")}${this.over.join("")}</g></svg>`;
     return s;
   }
 }
