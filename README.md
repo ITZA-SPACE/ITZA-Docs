@@ -1,0 +1,66 @@
+<div align="center">
+  <img alt="ITZA: See Earth through time" src="Assets/brand/banner.png" />
+</div>
+
+# ITZA Documentation
+
+Central documentation for **ITZA**, a web app that reads a field's history from NASA satellite data, replays every real past season (and plausible 2050 seasons) on candidate crop rotations, and shows which rotation would have held up best and why. Built for the NASA Space Apps Challenge 2026, "Field Shift: Adapting Farms with NASA Data".
+
+Code lives in [`ITZA-SPACE/itza`](https://github.com/ITZA-SPACE/itza). **If a page and the code disagree, the code wins.**
+
+## At a glance
+
+### System architecture
+
+The browser runs the simulation engine in a Web Worker and pulls NASA data through no-login adapters. Cloud Run serves the app and a science API, and a Cloudflare Worker proxies the visual assistant to the LLM providers.
+
+![ITZA system architecture](Assets/diagrams/1-architecture.png)
+
+### Data flow
+
+NASA and USDA sources are merged into one Field Data Bundle, with provenance on every series and gaps kept as gaps.
+
+![ITZA data flow](Assets/diagrams/2-data-flow.png)
+
+### Simulation engine
+
+Eleven seeded, repeatable steps from scenario to ranked rotations. Output is a labelled counterfactual, not measured yield.
+
+![ITZA simulation engine](Assets/diagrams/3-simulation-engine.png)
+
+### Build and deploy
+
+![ITZA build, data pipelines and deployment](Assets/diagrams/4-build-and-deploy.png)
+
+## Start here
+
+| You are | Read this |
+|---|---|
+| A reviewer with 10 minutes | [Solution overview](Overview/SOLUTION_OVERVIEW.md), then [Features](Overview/FEATURES.md) |
+| Checking how it is built | [Technical architecture](Architecture/TECHNICAL_ARCHITECTURE.md) |
+| Checking the science and data | [NASA data sources](Data-Sources/NASA_DATA_SOURCES.md) and the per-dataset reports |
+| Judging against the challenge | [Challenge rules](Challenge/CHALLENGE_RULES_2026.md), [Problem analysis](Overview/PROBLEM_ANALYSIS.md), [Demo strategy](Product/DEMO_STRATEGY.md) |
+
+## Contents
+
+| Folder | What is in it |
+|---|---|
+| [Overview](Overview) | Problem, solution, user journeys, feature list |
+| [Architecture](Architecture) | Full technical architecture |
+| [Product](Product) | MVP scope and demo strategy |
+| [Data-Sources](Data-Sources) | NASA data catalogue plus one report per dataset (SMAP, IMERG, HLS, SSURGO, ...) |
+| [Research](Research) | Background research, references, comparison with past Space Apps winners |
+| [Challenge](Challenge) | Challenge rules and eligibility |
+| [Assets](Assets) | Diagrams (PNG, SVG and generator source) and brand files |
+
+## Diagrams
+
+The four diagrams are generated from code. To rebuild them:
+
+```bash
+cd Assets/diagrams
+node source/diagrams.mjs .
+for f in *.svg; do rsvg-convert -w 1880 "$f" -o "${f%.svg}.png"; done
+```
+
+They follow the ITZA design system: Familjen Grotesk and DM Sans type, Rain `#7FD0FF` and Space `#2F7BFF` blues, glass panels on the light surface.
