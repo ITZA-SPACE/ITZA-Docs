@@ -45,9 +45,15 @@ Eleven seeded, repeatable steps from scenario to ranked rotations. Output is a l
 
 | Folder | What is in it |
 |---|---|
-| [Overview](Overview) | Problem, solution, user journeys, feature list |
+| [Overview](Overview) | Repository README, problem, solution, user journeys, feature list |
 | [Architecture](Architecture) | Full technical architecture |
-| [Product](Product) | MVP scope and demo strategy |
+| [Product](Product) | PRD, MVP scope and demo strategy |
+| [Components](Components) | One README per package and service: web app, engine, adapters, knowledge packs, UI kit, science API, assistant gateway, schemas, infra, pipelines |
+| [Machine-Learning](Machine-Learning) | Stress model card |
+| [Fixtures](Fixtures) | Test and demo fixture documentation |
+| [Submission](Submission) | Space Apps submission: project page, deck, references, video |
+| [Development](Development) | Contributor and agent guidance (AGENTS, CLAUDE) |
+| [Legal](Legal) | Third-party notices |
 | [Data-Sources](Data-Sources) | NASA data catalogue plus one report per dataset (SMAP, IMERG, HLS, SSURGO, ...) |
 | [Research](Research) | Background research, references, comparison with past Space Apps winners |
 | [Challenge](Challenge) | Challenge rules and eligibility |

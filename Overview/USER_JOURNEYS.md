@@ -1,6 +1,6 @@
 # Personas and User Journeys
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Feature IDs refer to [FEATURES.md](FEATURES.md).
+Back to [PRD](../Product/PRD.md). Feature IDs refer to [FEATURES.md](FEATURES.md).
 
 Personas are composite archetypes built from the challenge brief and the demo-region context; they are not real individuals. They should be validated with at least one farmer and one extension officer.
 

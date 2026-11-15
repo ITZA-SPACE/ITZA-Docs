@@ -1,8 +1,8 @@
 # Feature Specifications
 
-Feature IDs match the functional requirement IDs in the [PRD §6.1](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md#61-functional-requirements) (F-07 implements FR-07, and so on). Each spec states user value, behavior, data, acceptance criteria and priority.
+Feature IDs match the functional requirement IDs in the [PRD §6.1](../Product/PRD.md#61-functional-requirements) (F-07 implements FR-07, and so on). Each spec states user value, behavior, data, acceptance criteria and priority.
 
-Data independence: the "Core NASA data" column and per-feature **Data** lines name the current candidate sources for each information need ([PRD §8](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md#8-information-requirements-data-independent)). Sources may be replaced or added (for example from the official resource list published on November 13, [CHALLENGE_RULES_2026.md §7](../Challenge/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage)) without changing a feature's behavior or acceptance criteria.
+Data independence: the "Core NASA data" column and per-feature **Data** lines name the current candidate sources for each information need ([PRD §8](../Product/PRD.md#8-information-requirements-data-independent)). Sources may be replaced or added (for example from the official resource list published on November 13, [CHALLENGE_RULES_2026.md §7](../Challenge/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage)) without changing a feature's behavior or acceptance criteria.
 
 Priority: **P0** must be in the submitted demo · **P1** planned for the event build · **P2** stretch. Release tiers: [MVP_SCOPE.md](../Product/MVP_SCOPE.md). Architecture references: [TECHNICAL_ARCHITECTURE.md](../Architecture/TECHNICAL_ARCHITECTURE.md). Data references: [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md).
 
@@ -396,7 +396,7 @@ for exact methods, limitations and fixture-versus-live verification status.
 - **Transfer statement:** a plain sentence explains what this proves and what it does not prove for the story field (no public ground truth there; farmer confirmation is used instead).
 - Available as one step in guided demo mode (C-3) and as a tab in the Methods drawer.
 
-**Data:** IN-03 vegetation history and IN-13 ground-truth labels ([PRD §8](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md#8-information-requirements-data-independent)); published trial summaries ([USDA ARS, 2011](https://agresearchmag.ars.usda.gov/2011/jan/rotations); [2014 abstract](https://scisoc.confex.com/crops/2014am/webprogram/Paper86202.html)).
+**Data:** IN-03 vegetation history and IN-13 ground-truth labels ([PRD §8](../Product/PRD.md#8-information-requirements-data-independent)); published trial summaries ([USDA ARS, 2011](https://agresearchmag.ars.usda.gov/2011/jan/rotations); [2014 abstract](https://scisoc.confex.com/crops/2014am/webprogram/Paper86202.html)).
 
 **Acceptance**
 - Per-season agreement with ground truth computed for ≥ 15 seasons on at least 3 proof fields; result shown whatever its value (no cherry-picking).

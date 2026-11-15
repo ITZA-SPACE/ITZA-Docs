@@ -2,7 +2,7 @@
 
 Research behind the product direction: existing solutions, relevant science, data and tooling landscape (as of November 2026), lessons from past Space Apps winners, and a critical review of the team's original PRD.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). All sources are listed in [REFERENCES.md](REFERENCES.md).
+Back to [PRD](../Product/PRD.md). All sources are listed in [REFERENCES.md](REFERENCES.md).
 
 **Method.** We read the official challenge, FAQ and archived 2025 guides; searched scientific literature, product sites, GitHub/Hugging Face and NASA documentation; and verified key APIs with live requests on 2026-11-08 (results recorded in [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md)). Where a claim could not be verified, it is marked.
 

@@ -2,7 +2,7 @@
 
 How we present ITZA to local and global judges: the story, the live demo script, the 30-second video, the 7-slide deck, criterion-by-criterion tactics, and rehearsal plan.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Judging criteria analysis: [PROBLEM_ANALYSIS §3](../Overview/PROBLEM_ANALYSIS.md#3-judging-criteria).
+Back to [PRD](PRD.md). Judging criteria analysis: [PROBLEM_ANALYSIS §3](../Overview/PROBLEM_ANALYSIS.md#3-judging-criteria).
 
 ---
 
@@ -111,7 +111,7 @@ Production: screen capture at 60 fps from guided demo mode; English subtitles; r
 | 6 | **Impact** | Who benefits (farmers, extension services), global pipeline, local validation, path to pilots |
 | 7 | **Demo and team** | QR to live app, 30-second video link, team, SI usage disclosure; close on "ITZA SPACE: See Earth Through Time." |
 
-The 2026 guide requires the deck to show the **team name, team members' names and the selected challenge**, and to be in English; the deck source is [`submission/deck/slides.md`](https://github.com/ITZA-SPACE/itza/blob/dev/submission/deck/slides.md), whose title slide carries the challenge, team name and members; `pnpm submission:check` fails on more than 7 slides.
+The 2026 guide requires the deck to show the **team name, team members' names and the selected challenge**, and to be in English; the deck source is [`submission/deck/slides.md`](../Submission/slides.md), whose title slide carries the challenge, team name and members; `pnpm submission:check` fails on more than 7 slides.
 
 Design: high-contrast, large type, real screenshots, one idea per slide. Slide 1 title: "ITZA SPACE" with the tagline; the name story is spoken, not a slide of its own. Say "inspired by the Itzá"; no Maya imagery as decoration.
 
@@ -129,7 +129,7 @@ Award categories to mention in the submission narrative: Best Use of Data, Best 
 
 ## 7. Submission page copy plan
 
-Final copy: [`submission/project-page.md`](https://github.com/ITZA-SPACE/itza/blob/dev/submission/project-page.md); references: [`submission/references.md`](https://github.com/ITZA-SPACE/itza/blob/dev/submission/references.md) (generated from the register).
+Final copy: [`submission/project-page.md`](../Submission/project-page.md); references: [`submission/references.md`](../Submission/references.md) (generated from the register).
 
 - **High-level summary (≤ 3 sentences):** problem → solution → why it matters.
 - **Detailed description:** modules, how it works, benefits, tech stack, limitations.

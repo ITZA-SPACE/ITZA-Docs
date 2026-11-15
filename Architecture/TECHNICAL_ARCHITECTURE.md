@@ -2,7 +2,7 @@
 
 System design, technology choices, data-adapter layer, simulation engine, ML, SI assistant, 3D rendering, deployment, security and testing.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Data catalog: [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md). Build plan: [MVP_SCOPE.md](../Product/MVP_SCOPE.md).
+Back to [PRD](../Product/PRD.md). Data catalog: [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md). Build plan: [MVP_SCOPE.md](../Product/MVP_SCOPE.md).
 
 ---
 

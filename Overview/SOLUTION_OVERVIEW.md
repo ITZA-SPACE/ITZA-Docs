@@ -2,9 +2,9 @@
 
 What ITZA is, how it works, how NASA data drives it, and why it is different.
 
-> **ITZA SPACE: See Earth Through Time.** Named after the Itzá, a Maya people famed for astronomy and calendars. The Maya looked from Earth to the sky to understand the seasons; ITZA looks from space to Earth to understand what comes next: the land's past, its present and its possible futures. Full story: [PRD §0.3](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md#03-brand-itza).
+> **ITZA SPACE: See Earth Through Time.** Named after the Itzá, a Maya people famed for astronomy and calendars. The Maya looked from Earth to the sky to understand the seasons; ITZA looks from space to Earth to understand what comes next: the land's past, its present and its possible futures. Full story: [PRD §0.3](../Product/PRD.md#03-brand-itza).
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Feature specifications: [FEATURES.md](FEATURES.md).
+Back to [PRD](../Product/PRD.md). Feature specifications: [FEATURES.md](FEATURES.md).
 
 ---
 

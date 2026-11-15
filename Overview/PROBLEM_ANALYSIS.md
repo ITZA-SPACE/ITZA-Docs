@@ -2,7 +2,7 @@
 
 This document breaks down the challenge statement, the judging criteria and the real-world problem. It maps each requirement to our product response so nothing in the brief is missed.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md).
+Back to [PRD](../Product/PRD.md).
 
 ---
 

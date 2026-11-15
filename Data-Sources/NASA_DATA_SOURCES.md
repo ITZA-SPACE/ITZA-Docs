@@ -2,7 +2,7 @@
 
 Catalog of the datasets, APIs and tools ITZA uses: role, access, live-verified status, limitations, the plug-in model for adding the official challenge resources, and the data to test with before the event.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Architecture of the adapter layer: [TECHNICAL_ARCHITECTURE.md §5](../Architecture/TECHNICAL_ARCHITECTURE.md#5-data-layer).
+Back to [PRD](../Product/PRD.md). Architecture of the adapter layer: [TECHNICAL_ARCHITECTURE.md §5](../Architecture/TECHNICAL_ARCHITECTURE.md#5-data-layer).
 
 > **Verification note.** "Verified" entries were checked with live requests on **2026-11-08** from the team machine using a Sétif high-plains test point (36.19 N, 5.41 E) unless stated otherwise. Resolutions and coverage come from official product pages. The official challenge Resources tab was published on **2026-11-13**; its list is mapped to these sources in [CHALLENGE_RULES_2026.md §7](../Challenge/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage). No listed resource is individually mandatory; at least one NASA source is required for a Global Award.
 
@@ -155,7 +155,7 @@ The official Resources tab was published on **November 13, 2026** ([mapping](../
 
 ### Canonical variables (v1)
 
-Each canonical variable serves at least one PRD information need ([PRD §8](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md#8-information-requirements-data-independent)). A new official resource is accepted when it maps to a canonical variable; features never reference a dataset directly.
+Each canonical variable serves at least one PRD information need ([PRD §8](../Product/PRD.md#8-information-requirements-data-independent)). A new official resource is accepted when it maps to a canonical variable; features never reference a dataset directly.
 
 | Canonical name | Unit | Information need | Default sources (priority order) |
 |---|---|---|---|

@@ -2,7 +2,7 @@
 
 What ships in the hackathon submission, how the work is split across parallel coding agents, the integration gates, and the definition of done.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Feature specs: [FEATURES.md](../Overview/FEATURES.md). Architecture: [TECHNICAL_ARCHITECTURE.md](../Architecture/TECHNICAL_ARCHITECTURE.md).
+Back to [PRD](PRD.md). Feature specs: [FEATURES.md](../Overview/FEATURES.md). Architecture: [TECHNICAL_ARCHITECTURE.md](../Architecture/TECHNICAL_ARCHITECTURE.md).
 
 ---
 

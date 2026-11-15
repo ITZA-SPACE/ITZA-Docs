@@ -1,8 +1,8 @@
 # Challenge Rules and Official Resources (2026)
 
-What the official 2026 NASA Space Apps sources require of ITZA: eligibility, submission, judging, licensing and attribution, and how every resource listed for our challenge maps to ITZA. This is the compliance reference; product requirements stay in the [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md).
+What the official 2026 NASA Space Apps sources require of ITZA: eligibility, submission, judging, licensing and attribution, and how every resource listed for our challenge maps to ITZA. This is the compliance reference; product requirements stay in the [PRD](../Product/PRD.md).
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md). Dataset catalog: [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md). Demo plan: [DEMO_STRATEGY.md](../Product/DEMO_STRATEGY.md).
+Back to [PRD](../Product/PRD.md). Dataset catalog: [NASA_DATA_SOURCES.md](../Data-Sources/NASA_DATA_SOURCES.md). Demo plan: [DEMO_STRATEGY.md](../Product/DEMO_STRATEGY.md).
 
 > **Sources and date.** Everything below was read on **2026-11-13** from the official pages listed in [§9](#9-official-sources). Where this document and an official page disagree, the official page wins. Re-read the Project Submission Guide on the morning of November 14.
 

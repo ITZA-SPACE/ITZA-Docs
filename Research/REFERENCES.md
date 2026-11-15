@@ -2,7 +2,7 @@
 
 All sources cited across the documentation set, grouped by topic. Links were checked between **2026-11-08** and **2026-11-10**; the official Space Apps pages in §1 were re-read on **2026-11-13**.
 
-Back to [PRD](https://github.com/ITZA-SPACE/itza/blob/dev/PRD.md).
+Back to [PRD](../Product/PRD.md).
 
 **Access legend:** ✓ opened or returned HTTP 200 · ◐ publisher blocks automated access (403), content confirmed through search abstracts · ✗ not reachable from our network; claim taken from search abstracts only · ⏳ not yet published.
 
