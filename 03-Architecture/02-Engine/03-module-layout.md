@@ -38,5 +38,7 @@ packages/engine/src
     confidence.ts   coverage, scale ratio, model–satellite agreement, trait confidence, ground truth
     evidence.ts     schema-valid evidence cards with gaps, risks and provenance
     templates.ts    plain-English sentence templates
+    design.ts       Rotation Builder report: per-slot water stress, nitrogen, cover, pests and rule warnings
+  economics/      simple per-season margin from the farmer's prices (`margin.ts`)
   contracts/      generated types and the Ajv `validate(schemaId, data)` helper (schemas live in /schemas)
 ```

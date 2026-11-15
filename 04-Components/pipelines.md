@@ -1,6 +1,6 @@
 # Pipelines
 
-Batch Python jobs (uv): demo bundle build, fixture capture, ML training and Prithvi jobs on NVIDIA Brev. Outputs go to the VPS or the repository; Brev never serves ([Architecture docs](../03-Architecture/01-System-Overview/03-hosting-and-compute.md#hosting-and-compute)). Owned by workstreams D and M.
+Batch Python jobs (uv): demo bundle build, fixture capture, ML training, Prithvi, validation captures and the dataset store. They run on developer machines; an NVIDIA Brev instance is optional. Outputs go to the repository or the dataset store; batch jobs never serve ([Architecture docs](../03-Architecture/01-System-Overview/03-hosting-and-compute.md#hosting-and-compute)). Owned by workstreams D and M.
 
 ## Hero-field bundles (#17)
 

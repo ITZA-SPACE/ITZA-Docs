@@ -32,7 +32,7 @@ function overview() {
   c.card(350, 255, 310, 110, COL.rain, "Simulation engine", ["Web Worker · seeded", "FAO-56 ET0 · water balance", "200 Monte Carlo draws"], I("gears"));
   c.card(690, 255, 310, 110, COL.rain, "Hero bundles", ["4 precomputed demo fields", "static files, work offline"], I("json"));
   c.card(350, 415, 310, 110, COL.rain, "Offline cache", ["IndexedDB + service worker", "installable PWA"], I("cache"));
-  c.card(690, 415, 310, 110, COL.rain, "Map and 3D twin", ["MapLibre · deck.gl", "terrain, relief, zones"], I("mountain"));
+  c.card(690, 415, 310, 110, COL.rain, "Map and 3D twin", ["MapLibre · deck.gl · three.js", "terrain, relief, zones"], I("mountain"));
   c.card(350, 555, 310, 110, COL.violet, "Visual assistant", ["Vercel AI SDK + A2UI", "fixed answer catalog"], I("chat"));
   c.card(690, 555, 310, 110, COL.rain, "Browser adapters", ["POWER · MODIS · CMR", "no login, gaps never errors"], I("plug"));
   c.arrow([[505, 225], [505, 255]]);
@@ -41,8 +41,8 @@ function overview() {
   // google cloud
   c.card(1120, 130, 250, 110, COL.gcp, "Cloud Run", ["itza-web", "nginx · scales to zero"], { gcpIcon: "cloudrun" });
   c.card(1390, 130, 300, 110, COL.gcp, "Secret Manager", ["Earthdata token", "OpenET key"], { gcpIcon: "secret" });
-  c.card(1120, 290, 570, 150, COL.gcp, "Cloud Run: itza-science-api", ["FastAPI · 1 GiB · CPU always on · 1 instance", "bundles · zones · terrain · frames · NISAR context", "projections · boundaries · stress-model inference"], { gcpIcon: "cloudrun" });
-  c.card(1120, 500, 250, 100, COL.gcp, "Cloud Storage", ["dataset store", "SMAP + IMERG clips"], { gcpIcon: "storage" });
+  c.card(1120, 290, 570, 150, COL.gcp, "Cloud Run: itza-science-api", ["FastAPI · 1 GiB · CPU always on · 1 instance", "bundles · zones · terrain · relief · frames · context", "projections · boundaries · stress-model inference"], { gcpIcon: "cloudrun" });
+  c.card(1120, 500, 250, 100, COL.gcp, "Cloud Storage", ["SMAP, IMERG,", "GRACE, DEM clips"], { gcpIcon: "storage" });
   c.card(1390, 500, 300, 100, COL.gcp, "Runtime identity", ["itza-run account", "least privilege"], { gcpIcon: "iam" });
   c.card(1120, 650, 570, 80, COL.gcp, "Artifact Registry", ["images built by GitHub Actions on push to main · no key files"], { gcpIcon: "registry" });
   c.arrow([[1540, 240], [1540, 290]], { color: COL.gcp });
@@ -50,11 +50,11 @@ function overview() {
   c.arrow([[1540, 500], [1540, 440]], { color: COL.gcp, dashed: true });
 
   // cloudflare edge
-  c.card(1120, 880, 570, 130, COL.amber, "SI gateway", ["chat proxy · origin allow-list", "20 req/min per IP · 60k tokens per session", "validates answers against the A2UI catalog"], I("gateway"));
+  c.card(1120, 880, 570, 130, COL.amber, "SI gateway", ["chat proxy · origin allow-list", "40 req/min per IP · 400k tokens per session", "validates answers against the A2UI catalog"], I("gateway"));
 
   // third-party
-  c.card(1810, 130, 530, 130, COL.green, "NASA Earthdata", ["IMERG · SMAP · HLS · GLDAS · NASADEM", "GRACE · GEDI · ECOSTRESS (login)"], I("satellite"));
-  c.card(1810, 290, 530, 110, COL.green, "USDA SSURGO", ["soil properties", "+ POWER projections (NEX-GDDP)"], I("soil"));
+  c.card(1810, 130, 530, 130, COL.green, "NASA Earthdata", ["IMERG · SMAP · HLS · GLDAS · NASADEM", "NISAR · GRACE · GEDI · ECOSTRESS (login)"], I("satellite"));
+  c.card(1810, 290, 530, 110, COL.green, "USDA and USGS", ["SSURGO soil · 3DEP lidar · NAIP photos", "+ POWER projections (NEX-GDDP)"], I("soil"));
   c.card(1810, 415, 530, 110, COL.green, "Basemaps and terrain", ["OpenFreeMap · EOx imagery", "AWS terrain tiles"], I("globe"));
   c.card(1810, 555, 530, 110, COL.green, "NASA open APIs", ["POWER · ORNL MODIS · CMR", "SoilGrids fallback (no login)"], I("sunCloud"));
   c.card(1810, 830, 530, 110, COL.violet, "LLM providers", ["Gemini 3.1 Flash-Lite", "fallback: Groq gpt-oss-120b"], I("chip"));
@@ -86,7 +86,7 @@ function overview() {
     ["Client: the browser", "Web app, engine, adapters, offline cache.", "Costs nothing to run and works offline for the demo fields."],
     ["Server: Google Cloud Run", "itza-web scales to zero; itza-science-api stays", "warm with one instance. Dataset store on Cloud Storage."],
     ["Server: Cloudflare Workers", "SI gateway on the free plan keeps model keys off", "the client and caps each session's requests and tokens."],
-    ["Build and batch", "GitHub Actions builds and deploys on push to main.", "NVIDIA Brev runs batch GPU jobs and never serves traffic."],
+    ["Build and batch", "GitHub Actions builds and deploys on push to main.", "Batch jobs run on team machines and never serve traffic."],
   ]);
   return c;
 }
@@ -125,7 +125,7 @@ function gcpDeploy() {
   c.card(1220, 290, 460, 430, COL.gcp, "Cloud Run: itza-science-api", [
     "FastAPI on :8000 · public · gen2", "1 GiB · CPU always on · 1 instance", "runs as the itza-run service account", "",
     "ITZA_ENVIRONMENT=production", "ITZA_CORS_ORIGINS = the web origin", "ITZA_DATASET_STORE_DIR=/data/store", "scratch space in /tmp/itza", "",
-    "/v1/bundles · /v1/zones · /v1/projection", "/v1/boundaries · /stress · NISAR, GRACE, GEDI", "terrain, frames and soil per bundle"], { gcpIcon: "cloudrun" });
+    "/v1/bundles · /v1/zones · /v1/projection", "/v1/boundaries · /v1/relief · /v1/ml/stress", "terrain · frames · soil · landscape context"], { gcpIcon: "cloudrun" });
   c.card(870, 470, 250, 100, COL.gcp, "Secret Manager", ["earthdata-token", "openet-api-key"], { gcpIcon: "secret" });
   c.card(870, 610, 250, 110, COL.gcp, "Cloud Storage", ["<project>-itza-data", "versioned, never public"], { gcpIcon: "storage" });
   c.arrow([[780, 330], [870, 330]], { color: COL.violet, label: ["push", "images"], labelAt: [825, 330] });
@@ -146,7 +146,7 @@ function gcpDeploy() {
   c.arrow([[1680, 687], [1780, 687]], { color: COL.green, label: ["login", "token"], labelAt: [1730, 687] });
 
   // pipelines
-  c.card(60, 900, 320, 130, COL.amber, "NVIDIA Brev", ["ephemeral GPU and CPU batch", "Prithvi training, hero bundles", "never serves traffic"], I("server"));
+  c.card(60, 900, 320, 130, COL.amber, "NVIDIA Brev (optional)", ["scripted CPU/GPU jobs", "not needed so far", "never serves traffic"], I("server"));
   c.card(430, 900, 420, 130, COL.amber, "Pipelines (Python, uv)", ["build demo bundles · capture fixtures", "train the stress model · validation"]);
   c.card(890, 900, 260, 130, COL.amber, "data_store sync.py", ["gcloud storage rsync", "SHA-256 verified"]);
   c.card(1200, 900, 460, 130, COL.grey, "Credentials stay local", ["gcloud login for the bucket", "EARTHDATA_TOKEN from the environment", "nothing is stored in the repo"]);

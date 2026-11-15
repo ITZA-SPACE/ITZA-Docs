@@ -12,7 +12,7 @@ The challenge's Resources tab describes SRTM as global elevation data for slope,
 |---|---|---|---|
 | **NASADEM_HGT v001** | 30 m | NASA's reprocessed SRTM elevation | **Yes, primary** |
 | **SRTMGL1 v003** | 30 m | Original SRTM 1 arc-second | **Yes, fallback tile** |
-| Other DEMs (for example higher-resolution national lidar) *(from my knowledge)* | varies | Finer elevation | No |
+| USGS 3DEP lidar elevation (US only) | about 1 m | Finer elevation | **Yes, close-up 3D relief view only** (since #157; `terrain/relief_sources.py`). Outside the US the relief falls back to 30 m AWS Terrarium tiles. It does not feed slope or the engine |
 
 The data is a static snapshot from the shuttle mission of 2000-02-11 to 2000-02-22, so terrain is not time-varying in the app.
 
@@ -52,7 +52,7 @@ Every field bundle carries static `elevation` and `slope` series with provenance
 
 1. **Use the derived terrain more in the ranking.** Concavity and flow accumulation are computed but, as far as I found, feed only zones and the twin. A wetness-type index from slope and accumulation could improve the runoff and water-collection part of the water balance *(from my knowledge)*.
 2. **Aspect.** It is computed but I found no consumer. It could inform frost pockets or heat load on slopes.
-3. **Finer DEMs for US fields** (national lidar products) would sharpen slope, but they are outside the challenge list and US-only *(from my knowledge)*.
+3. **Use the lidar heights beyond the relief view.** Since #157 the close-up relief reads USGS 3DEP lidar for US fields, but slope, zones and the engine still use 30 m NASADEM. Deriving slope from 3DEP on US fields would sharpen erosion and runoff there; it stays US-only.
 
 ## 6. Open items
 - Check what the frost-pocket overlay in the twin actually uses (concavity, aspect, or both).

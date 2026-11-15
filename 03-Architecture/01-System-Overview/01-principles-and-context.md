@@ -31,31 +31,33 @@ Why the system is shaped the way it is, who talks to whom, and what each contain
                          │ Engine Web Worker · IndexedDB  │
                          └──┬──────────┬───────────┬──────┘
           no-auth, CORS     │          │           │ HTTPS
-   ┌────────────────────────▼─┐  ┌─────▼──────┐  ┌─▼───────────────────────┐
-   │ NASA POWER (daily, clim., │  │ SI gateway │  │ Data & Science service  │
-   │ projection) · ORNL MODIS  │  │ (serverless│  │ (Python, FastAPI)       │
-   │ REST · CMR search · tiles │  │  worker)   │  │ earthaccess · rasterio  │
-   └───────────────────────────┘  └──┬───┬─────┘  │ xarray · ML · TiTiler   │
-                                     │   │        └──┬──────────┬───────────┘
+   ┌────────────────────────▼─┐  ┌─────▼──────┐  ┌─▼────────────────────────┐
+   │ NASA POWER daily · ORNL   │  │ SI gateway │  │ Data & Science service   │
+   │ MODIS REST · SoilGrids ·  │  │ (Cloudflare│  │ (Python, FastAPI, on     │
+   │ CMR search · basemaps     │  │  Worker)   │  │  Cloud Run) earthaccess  │
+   └───────────────────────────┘  └──┬───┬─────┘  │ rasterio · xarray · ML   │
+                                     │   │        └──┬──────────┬────────────┘
                            LLM APIs ◀┘   └▶ NASA MCP │          │ Earthdata Login
                      (Gemini, Groq)     (POWER, CMR) │          ▼
                                                      │   NASA Earthdata Cloud / DAACs
-                                                     │   (IMERG, SMAP, HLS, NISAR,
-                                                     ▼    GRACE, GEDI, ECOSTRESS),
-                                           Static bundle store  NEX-GDDP (AWS S3)
-                                           (precomputed demo +
-                                            cached fields)
+                                                     │   (IMERG, SMAP, HLS, GLDAS/NLDAS,
+                                                     │    NASADEM, NISAR, GRACE, GEDI,
+                                                     │    ECOSTRESS) · POWER projection
+                                                     ▼    · USDA SSURGO · USGS 3DEP/NAIP
+                                      Dataset store (GCS, read-only clips)
+                                      + file cache of built bundles;
+                                      hero bundles ship inside the web image
 ```
 
 ## Containers and responsibilities
 
 | Container | Responsibility | Tech | Runs on |
 |---|---|---|---|
-| **Web app** | UI, map, 3D, charts, state, offline cache, guided demo | React + TypeScript + Vite | Cloudflare edge (static assets) |
-| **Engine (`@itza/engine`)** | Pure functions: ET0, water balance, thermal, pest, N, cover, erosion, scoring, resilience, Monte Carlo, delta-change, candidate generation, evidence generation | TypeScript, no DOM deps | Web Worker (browser) and Node (tests, server-side render of PDFs if needed) |
-| **Browser adapters** | Fetch POWER, ORNL MODIS, CMR metadata, tiles; normalize to canonical series | TypeScript | Browser |
-| **Data & Science service** | Authenticated NASA access, raster clipping/aggregation, bundle building, zones, NISAR/HLS processing, projection fallback, ML inference, PDF rendering (optional) | Python 3.12+, FastAPI | Team VPS (Docker) behind Cloudflare Tunnel |
-| **Pipelines** | Batch precompute demo bundles; ML training; fixture capture | Python scripts/notebooks (uv) | Developer machines, CI, NVIDIA Brev batch instances |
-| **Tile service** | On-the-fly HLS/IMERG tiles for 3D/2D layers | TiTiler-CMR | Same container as service, or precomputed PNG frames |
+| **Web app** | UI, map, 3D, charts, state, offline cache, guided demo | React + TypeScript + Vite | Browser; served by Cloud Run service `itza-web` (nginx) |
+| **Engine (`@itza/engine`)** | Pure functions: ET0, water balance, thermal, pest, N, cover, erosion, scoring, resilience, Monte Carlo, delta-change, candidate generation, evidence generation | TypeScript, no DOM deps | Web Worker in the browser for the comparison, 2050, builder and assistant tools; the screen's thread for Field Memory, the Climate Fingerprint, zone backtests and the Akron check; Node for tests and pipelines |
+| **Browser adapters** | Fetch POWER, ORNL MODIS, SoilGrids and CMR metadata; normalize to canonical series | TypeScript | Browser |
+| **Data & Science service** | Authenticated NASA access, raster clipping/aggregation, bundle building, terrain, relief, zones, field outlines, landscape context, projection factors, ML inference | Python 3.12+ (3.13 in use), FastAPI | Cloud Run service `itza-science-api` ([ADR 013](../09-Decisions/01-architecture-decision-log.md)); Docker Compose behind Cloudflare Tunnel is the manual fallback |
+| **Pipelines** | Batch precompute demo bundles; ML training; Prithvi; validation captures; dataset store sync | Python scripts (uv) | Developer machines; an NVIDIA Brev instance is optional (scripted, never serves) |
+| **Frames and layers** | NDVI/moisture frames for the 3D and 2D layers | Precomputed PNG frames served by the science API or shipped with hero bundles (no tile server) | Science API / web image |
 | **SI gateway** | Hide API keys; proxy LLM; host MCP client to NASA POWER MCP and CMR MCP; validate generated UI surfaces against the catalog; rate-limit | TypeScript serverless (Cloudflare Workers) | Cloudflare edge (free plan) |
-| **Bundle store** | Precomputed Field Data Bundles, frames, zone GeoJSON | Static files (Parquet/JSON/PNG) | Cloudflare static assets (hero fields); VPS for cached and large files |
+| **Bundle store** | Precomputed Field Data Bundles, frames, terrain, relief, zone GeoJSON | Static files (JSON/PNG/JPEG/GeoTIFF) | Hero fields inside the web image (`apps/web/public/bundles/`); built bundles in the science API's file cache; large NASA clips in the GCS dataset store |

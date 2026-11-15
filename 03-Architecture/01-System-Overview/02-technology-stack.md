@@ -23,12 +23,13 @@ Versions are the latest published on npm/PyPI on 2026-11-08; pin exact versions 
 | Routing / data fetching | TanStack Router + TanStack Query | 1.170 / 5.107 | Typed routes; caching, retries, progressive loading | React Router |
 | State | **Zustand** | 5.1 | Small, simple global state (field, inputs, scenario) | Redux Toolkit |
 | Styling / UI | **Tailwind CSS** + headless accessible primitives (Radix-based component kit); DM Sans and Familjen Grotesk (Fontsource, bundled); Lucide icons; KaTeX for formulas | 4.3 | Fast iteration, accessible primitives; fonts work offline | CSS modules |
-| Map | **MapLibre GL JS** | 6.17 | Open source, no token, 3D terrain, globe projection (since v5) | Mapbox GL (token, terms), Leaflet (no 3D) |
+| Map | **MapLibre GL JS** | 6.18 | Open source, no token, 3D terrain, globe projection (since v5) | Mapbox GL (token, terms), Leaflet (no 3D) |
 | 3D / analytics layers | **deck.gl** (interleaved with MapLibre) | 9.4 | TerrainLayer, BitmapLayer, GPU heatmaps; strong MapLibre pairing | CesiumJS 1.147 (heavier, globe/3D Tiles), three.js |
 | Drawing | **Terra Draw** + MapLibre adapter | 1.39 / 1.5 | Maintained, multi-mode drawing, works with MapLibre | mapbox-gl-draw 1.5 |
 | Geospatial utils | **Turf** | 7.4 | Area, centroid, buffers, intersections | — |
 | Charts | **ECharts** | 6.1 | Large time series, animations, heat strips | Recharts 3.10 (simpler), Observable Plot |
-| Drag and drop | **dnd-kit** (`@dnd-kit/react`) | 0.5 (core 6.3) | Accessible (keyboard/touch) DnD for the rotation builder | react-beautiful-dnd (unmaintained) |
+| Close-up 3D relief | **three.js** | 0.170 | One mesh per field from its height image, with the aerial photo or height colours and a rain sheet (`apps/web/src/twin/relief/`) | deck.gl SimpleMeshLayer |
+| Drag and drop | **dnd-kit** (`@dnd-kit/core` + `@dnd-kit/sortable`) | core 6.3, sortable 10 | Accessible (keyboard/touch) DnD for the rotation builder | react-beautiful-dnd (unmaintained) |
 | UI copy | One English strings file (`en.json`), plain typed lookup; no i18n library | — | English only; keeps a seam for post-event localization at zero cost | i18next (post-event, if localized) |
 | SI client | **Vercel AI SDK** (`ai`, `@ai-sdk/react`) | 7.0 / 4.0 | Streaming chat, tool calling with client-side tool execution, typed tool parts for static generative UI, provider-agnostic | Direct REST |
 | Generative UI | **A2UI** protocol v0.9.1 + `@a2ui/react` renderer with the app's own catalog (§10.2) | 0.15 | Declarative, catalog-restricted, streaming UI from the assistant; no model-written code | CopilotKit + AG-UI, json-render |
@@ -41,22 +42,21 @@ Basemaps and terrain: OpenFreeMap vector style (the "dark" style, no key), EOxCl
 
 ## Backend and science
 
+
+
 | Concern | Choice | Version | Why |
 |---|---|---|---|
-| Runtime / packaging | Python 3.12+ with **uv** | — | Fast, reproducible environments |
-| API | **FastAPI** + Uvicorn + Pydantic v2 | 0.162 / 0.54 / 2.14 | Typed, OpenAPI generated, team knows it (QFarm backend uses FastAPI) |
-| NASA access | **earthaccess** | 0.19 | Official community library: Earthdata Login, CMR search, cloud/HTTPS download, streaming |
-| SAR (NISAR) search | **asf_search** | 14.1 | ASF DAAC search/download |
-| STAC | pystac-client | 0.9 | HLS via CMR-STAC |
-| Rasters / arrays | **xarray**, **rioxarray**, **rasterio**, h5netcdf, zarr | 2026.9 / 0.24 / 1.5 / 1.8 / 3.4 | HDF5/NetCDF/COG handling, clipping, resampling |
-| Vector | geopandas, shapely | 1.2 / 2.2 | Field geometry ops |
-| Tabular | **Polars** (+ pandas 3 where libraries require) | 2.1 | Fast series aggregation |
-| Local analytics store | **DuckDB** (spatial extension) | 2.0 | Query cached bundles/Parquet without a server DB |
-| Tiles | **TiTiler-CMR** | 1.0.x | Dynamic HLS/IMERG tiles straight from CMR |
-| ML | **LightGBM**, **SHAP**, scikit-learn | 4.7 / 0.54 / 1.9 | Explainable tabular stress model |
-| Foundation model | **TerraTorch** + Prithvi-EO-2.0 (tiny-TL / 100M-TL) | 1.2 | NASA/IBM GeoFM fine-tuning and inference |
-| Reference crop model (validation) | **AquaCrop-OSPy** (`aquacrop`) | 3.1 | Cross-check water-balance behavior |
-| SI agent (server-side option) | **pydantic-ai** with MCP client | 2.66 | If agent logic moves server-side |
+| Runtime / packaging | Python 3.12+ with **uv** (3.13 in use) | — | Fast, reproducible environments |
+| API | **FastAPI** + Uvicorn + Pydantic v2 (+ pydantic-settings) | 0.162 / 0.54 / 2.14 | Typed, OpenAPI generated, team knows it (QFarm backend uses FastAPI) |
+| NASA access | **earthaccess** | 0.19 | Official community library: Earthdata Login, CMR search, cloud/HTTPS download |
+| Rasters / arrays | **rasterio**, **rioxarray** (with xarray), h5netcdf, h5py, numpy, scipy, affine, pyproj | 1.5 / 0.23 / 1.8 / 3.16 | HDF5/NetCDF/COG handling, clipping, resampling, reprojection |
+| Vector | **shapely** | 2.2 | Field geometry, area and clipping |
+| Images | Pillow | 13.0 | PNG frames, height images, JPEG fitting |
+| HTTP | httpx | 0.28 | Upstream calls with timeouts and retries |
+| ML | **LightGBM** (TreeSHAP contributions through `pred_contrib`), scikit-learn (zones: k-means, silhouette, adjusted Rand) | 4.7 / 1.9 | Explainable tabular stress model; deterministic zoning |
+| Foundation model (pipelines only) | **TerraTorch** + Prithvi-EO-2.0 tiny-TL | — | CPU experiment in `pipelines/prithvi/`; the API only serves its published rasters and never installs torch |
+
+Considered in the design but **not used**: asf_search and pystac-client (NISAR and HLS are found through earthaccess), geopandas, zarr, Polars, DuckDB (no index is needed over the file cache), TiTiler-CMR (frames are precomputed PNGs instead of dynamic tiles), the separate `shap` package, AquaCrop-OSPy (no reference cross-check has been run) and pydantic-ai (agent logic stays in the gateway).
 
 No relational database is needed for the hackathon: bundles are immutable files keyed by hash; user edits live in the browser and in share links. A hosted DB is a post-event option.
 
@@ -64,7 +64,7 @@ No relational database is needed for the hackathon: bundles are immutable files 
 
 | Capability | Default (free, no card) | Fallback | Paid option (not required) |
 |---|---|---|---|
-| LLM with tool calling and structured output (A2UI surfaces) | Gemini API free tier (Google AI Studio key; limits shown per project in AI Studio) | Groq free tier (Llama/Qwen models), or template intents with predefined layouts | Claude, GPT, Gemini paid tiers |
+| LLM with tool calling and structured output (A2UI surfaces) | Gemini API free tier, model `gemini-3.1-flash-lite` (Google AI Studio key) | Groq free tier, model `openai/gpt-oss-120b`; or template intents with predefined layouts | Claude, GPT, Gemini paid tiers |
 | NASA data tools | NASA POWER MCP (no key), NASA CMR MCP (no key) | Direct REST via engine tools | — |
 
-Free-tier limits change frequently (reported Gemini free-tier reductions in Dec 2025 and 2026); the gateway enforces per-session budgets and falls back automatically.
+Free-tier limits change frequently (reported Gemini free-tier reductions in Dec 2025 and 2026); the gateway enforces per-session budgets and falls back automatically. Model ids live in `services/si-gateway/src/providers.ts`, because providers retire models.

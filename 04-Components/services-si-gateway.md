@@ -11,10 +11,10 @@ Every response enforces the origin allow-list (`ALLOWED_ORIGINS`).
 
 `/chat` behavior:
 
-- Models: Gemini free tier first, Groq when Gemini fails before output (quota, auth, 5xx). A provider without a key is skipped. No key at all returns `503 {"error":"no_provider","fallback":"templates"}`.
+- Models: Gemini free tier first (`gemini-3.1-flash-lite`), Groq (`openai/gpt-oss-120b`) when Gemini fails before output (quota, auth, 5xx). A provider without a key is skipped. No key at all returns `503 {"error":"no_provider","fallback":"templates"}`.
 - Tools: client tools (engine, glossary, UI) are declared without `execute` and run in the browser. NASA POWER MCP and NASA CMR MCP tools run in the gateway as `power_*` / `cmr_*`; each result is `{ untrusted_data, provenance }`. An MCP server that is down is skipped. Only those two fixed URLs are ever fetched.
 - Policy: system prompt in `src/policy.ts`. Clients cannot send `system` messages.
-- Limits (`src/budget.ts`): 20 requests/min per IP (`429 rate_limited` + `Retry-After`); 30 requests and 60k tokens per session (`429 budget_exhausted`, `fallback: "templates"`); 64 KB body (`413`); 40 messages. Counters live in the Worker isolate, so they are best effort and reset on cold start.
+- Limits (`src/budget.ts`, raised in #147 so a long demo does not run out): 40 requests/min per IP (`429 rate_limited` + `Retry-After`); 150 requests and 400k tokens per session (`429 budget_exhausted`, `fallback: "templates"`); 64 KB body (`413`); 40 messages; 1,200 output tokens and 6 steps per request. Counters live in the Worker isolate, so they are best effort and reset on cold start.
 - Provider errors are never forwarded: the stream carries `provider_error`, logs carry only an error name and status.
 
 | Task | Command |
