@@ -1,6 +1,6 @@
 # ITZA Data & Science API
 
-FastAPI service for work that needs secrets or heavy raster processing: authenticated NASA Earthdata access, Field Data Bundles, management zones, NISAR snapshots, climate projection factors and ML inference. See [TECHNICAL_ARCHITECTURE.md §3 and §11](../03-Architecture/TECHNICAL_ARCHITECTURE.md#11-service-api-data--science).
+FastAPI service for work that needs secrets or heavy raster processing: authenticated NASA Earthdata access, Field Data Bundles, management zones, NISAR snapshots, climate projection factors and ML inference. See [Architecture docs](../03-Architecture/05-Back-end/01-service-api.md#service-api-data--science).
 
 ## Layout
 
@@ -160,7 +160,7 @@ and starts a job, answering 202 at once with `{id, status, progress}`.
 `GET /v1/boundaries/{id}` polls it: when `status` is `done` it carries a proposed field
 polygon (`proposal`: `geometry`, `area_ha`, `confidence`, `separation`, `dates_used`,
 `period`, `sources`) traced from 30 m HLS NDVI behavior around the click (method
-`hls-temporal-segmentation`, see TECHNICAL_ARCHITECTURE §8.3); when `error`, an `error`
+`hls-temporal-segmentation`, see Architecture docs); when `error`, an `error`
 with `kind` (`no-field`, `timeout`, `unavailable`) and a message. A first click on a new
 place takes minutes while HLS scenes download. Jobs are kept in memory only.
 

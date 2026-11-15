@@ -31,7 +31,7 @@ One property is intentional and must be preserved in future edits:
 | [docs/FEATURES.md](../01-Overview/FEATURES.md) | Feature specifications, priorities, acceptance criteria |
 | [docs/USER_JOURNEYS.md](../01-Overview/USER_JOURNEYS.md) | Personas and end-to-end journeys |
 | [docs/NASA_DATA_SOURCES.md](../05-Data-Sources/NASA_DATA_SOURCES.md) | Candidate datasets per information need, live-verified status, plug-in model, test fields |
-| [docs/TECHNICAL_ARCHITECTURE.md](../03-Architecture/TECHNICAL_ARCHITECTURE.md) | Engineering design: stack, data adapters, engine methods, ML, SI, hosting, security |
+| [Architecture docs](../03-Architecture/00-README.md) | Engineering design: stack, data adapters, engine methods, ML, SI, hosting, security |
 | [docs/MVP_SCOPE.md](MVP_SCOPE.md) | Release tiers, agent workstreams, build sequencing, definition of done |
 | [docs/DEMO_STRATEGY.md](DEMO_STRATEGY.md) | Demo script, 30-second video, 7-slide deck, judging strategy |
 | [docs/REFERENCES.md](../07-Research/REFERENCES.md) | All sources and useful links |
@@ -269,7 +269,7 @@ Rules:
 
 ## 9. Scientific validity requirements
 
-- Crop water stress, heat and frost risk use **published, citable methods**; the chosen methods and formulas are documented in [docs/TECHNICAL_ARCHITECTURE.md](../03-Architecture/TECHNICAL_ARCHITECTURE.md).
+- Crop water stress, heat and frost risk use **published, citable methods**; the chosen methods and formulas are documented in [Architecture docs](../03-Architecture/00-README.md).
 - Every modeled quantity is cross-checked against an independent observation where one exists (e.g., modeled soil water vs observed soil moisture; modeled season vs observed vegetation).
 - Inferred field history is validated against public ground truth on the proof field and against farmer confirmation on the story field.
 - Results are relative comparisons labeled as counterfactual ("would have"), never forecasts.

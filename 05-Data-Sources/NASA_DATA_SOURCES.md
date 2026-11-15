@@ -2,7 +2,7 @@
 
 Catalog of the datasets, APIs and tools ITZA uses: role, access, live-verified status, limitations, the plug-in model for adding the official challenge resources, and the data to test with before the event.
 
-Back to [PRD](../02-Product/PRD.md). Architecture of the adapter layer: [TECHNICAL_ARCHITECTURE.md §5](../03-Architecture/TECHNICAL_ARCHITECTURE.md#5-data-layer).
+Back to [PRD](../02-Product/PRD.md). Architecture of the adapter layer: [Architecture docs](../03-Architecture/00-README.md).
 
 > **Verification note.** "Verified" entries were checked with live requests on **2026-11-08** from the team machine using a Sétif high-plains test point (36.19 N, 5.41 E) unless stated otherwise. Resolutions and coverage come from official product pages. The official challenge Resources tab was published on **2026-11-13**; its list is mapped to these sources in [CHALLENGE_RULES_2026.md §7](../08-Challenge-and-Submission/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage). No listed resource is individually mandatory; at least one NASA source is required for a Global Award.
 
@@ -149,7 +149,7 @@ The official Resources tab was published on **November 13, 2026** ([mapping](../
 
 
 1. **Canonical variables.** The engine consumes only canonical variables (see table below). Adapters translate source variables and units.
-2. **Adapter manifest.** Each source is declared in `data-sources.yaml` and implemented as a small adapter (Python for authenticated/raster sources; TypeScript for browser-fetchable sources). Contract in [TECHNICAL_ARCHITECTURE §5](../03-Architecture/TECHNICAL_ARCHITECTURE.md#5-data-layer).
+2. **Adapter manifest.** Each source is declared in `data-sources.yaml` and implemented as a small adapter (Python for authenticated/raster sources; TypeScript for browser-fetchable sources). Contract in [Architecture docs](../03-Architecture/00-README.md).
 3. **Priority chains.** For each canonical variable, an ordered list of sources with fallback (e.g., precipitation: IMERG Final → IMERG Late → POWER).
 4. **Resource intake checklist:** for each new resource, record product ID, version, variables, resolution, period, access, auth, CORS; map to canonical variables; add a manifest entry; run the adapter conformance test; regenerate demo bundles.
 

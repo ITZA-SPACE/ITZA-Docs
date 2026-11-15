@@ -2,7 +2,7 @@
 
 What ships in the hackathon submission, how the work is split across parallel coding agents, the integration gates, and the definition of done.
 
-Back to [PRD](PRD.md). Feature specs: [FEATURES.md](../01-Overview/FEATURES.md). Architecture: [TECHNICAL_ARCHITECTURE.md](../03-Architecture/TECHNICAL_ARCHITECTURE.md).
+Back to [PRD](PRD.md). Feature specs: [FEATURES.md](../01-Overview/FEATURES.md). Architecture: [Architecture docs](../03-Architecture/00-README.md).
 
 ---
 
@@ -130,7 +130,7 @@ If a T1 feature misses G4:
 ## 6. Pre-event preparation (data and tooling readiness)
 
 - Create free accounts: NASA Earthdata Login, Google AI Studio (Gemini key), Groq, Cloudflare, GitHub, NVIDIA Brev (redeem team credits).
-- Prepare the team VPS and domain: domain DNS on Cloudflare, Docker installed, `cloudflared` ready (see [TECHNICAL_ARCHITECTURE §4.4](../03-Architecture/TECHNICAL_ARCHITECTURE.md#44-hosting-and-compute)).
+- Prepare the team VPS and domain: domain DNS on Cloudflare, Docker installed, `cloudflared` ready (see [Architecture docs](../03-Architecture/01-System-Overview/03-hosting-and-compute.md#hosting-and-compute)).
 - Confirm free-tier limits and card requirements for chosen hosts.
 - Official Resources tab read on November 13 and mapped ([CHALLENGE_RULES_2026.md §7](../08-Challenge-and-Submission/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage)); new sources follow the resource intake checklist ([NASA_DATA_SOURCES §6](../05-Data-Sources/NASA_DATA_SOURCES.md#6-plug-in-model-for-the-official-resources)).
 - Shortlist hero-field locations (story: Sétif; proof: near Akron, Colorado, with CDL labels) and the local reviewer (agronomist/farmer) for the story-field case.
@@ -141,7 +141,7 @@ If a T1 feature misses G4:
 - Every number shows provenance; gaps and risks populated where applicable.
 - Runs from demo bundles offline; degrades gracefully with live data failures.
 - Unit/golden/conformance tests added; E2E path covered for user-visible flows.
-- Performance budget respected ([TECHNICAL_ARCHITECTURE §13](../03-Architecture/TECHNICAL_ARCHITECTURE.md#13-performance-budgets)).
+- Performance budget respected ([Architecture docs](../03-Architecture/08-Quality/01-performance-and-reliability.md#performance-budgets)).
 - Accessible (keyboard, contrast, screen-reader labels).
 
 ## 8. Submission checklist

@@ -4,7 +4,7 @@ Feature IDs match the functional requirement IDs in the [PRD §6.1](../02-Produc
 
 Data independence: the "Core NASA data" column and per-feature **Data** lines name the current candidate sources for each information need ([PRD §8](../02-Product/PRD.md#8-information-requirements-data-independent)). Sources may be replaced or added (for example from the official resource list published on November 13, [CHALLENGE_RULES_2026.md §7](../08-Challenge-and-Submission/CHALLENGE_RULES_2026.md#7-official-resources-for-field-shift-and-itza-coverage)) without changing a feature's behavior or acceptance criteria.
 
-Priority: **P0** must be in the submitted demo · **P1** planned for the event build · **P2** stretch. Release tiers: [MVP_SCOPE.md](../02-Product/MVP_SCOPE.md). Architecture references: [TECHNICAL_ARCHITECTURE.md](../03-Architecture/TECHNICAL_ARCHITECTURE.md). Data references: [NASA_DATA_SOURCES.md](../05-Data-Sources/NASA_DATA_SOURCES.md).
+Priority: **P0** must be in the submitted demo · **P1** planned for the event build · **P2** stretch. Release tiers: [MVP_SCOPE.md](../02-Product/MVP_SCOPE.md). Architecture references: [Architecture docs](../03-Architecture/00-README.md). Data references: [NASA_DATA_SOURCES.md](../05-Data-Sources/NASA_DATA_SOURCES.md).
 
 ---
 
@@ -67,7 +67,7 @@ Cross-cutting capabilities used by many features: **C-1 Knowledge packs** (crops
 **Value:** All the data the engine needs, for any field, with provenance.
 
 **Behavior**
-- On field creation, the client requests a **Field Data Bundle** (schema in TECHNICAL_ARCHITECTURE §5.3).
+- On field creation, the client requests a **Field Data Bundle** (schema in Architecture docs).
 - Hero fields (story and proof) load from precomputed bundles (no network).
 - New fields: browser fetches no-auth CORS sources directly (POWER daily 1981–present, ORNL MODIS NDVI 2000–present); the Python service adds authenticated sources (IMERG, SMAP L4, HLS VI, NISAR) when available. Results stream in progressively.
 - Missing or failed sources degrade gracefully: the bundle records the gap; confidence drops; the UI shows "not available".
@@ -152,7 +152,7 @@ Cross-cutting capabilities used by many features: **C-1 Knowledge packs** (crops
 **Value:** Shows how each rotation would actually have fared in every real season, including the worst ones.
 
 **Behavior**
-- For each rotation × historical season: daily simulation (TECHNICAL_ARCHITECTURE §6):
+- For each rotation × historical season: daily simulation (Architecture docs):
   - FAO-56 root-zone water balance (Kc curves by stage, TAW from soil + rooting depth, depletion, Ks stress, deep percolation, runoff via curve-number simplification).
   - Thermal: frost/heat events weighted by stage sensitivity.
   - Nitrogen credit, residue/root biomass, ground-cover months.

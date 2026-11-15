@@ -2,7 +2,7 @@
 
 **See Earth Through Time.** ITZA reads a field's history from NASA satellite data, replays every real past season (and plausible 2050 seasons) on candidate crop rotations, and shows which rotation would have held up best and why. NASA Space Apps Challenge 2026, "Field Shift: Adapting Farms with NASA Data".
 
-Product: [PRD.md](../02-Product/PRD.md) · Architecture: [docs/TECHNICAL_ARCHITECTURE.md](../03-Architecture/TECHNICAL_ARCHITECTURE.md) · Build plan: [docs/MVP_SCOPE.md](../02-Product/MVP_SCOPE.md)
+Product: [PRD.md](../02-Product/PRD.md) · Architecture: [Architecture docs](../03-Architecture/00-README.md) · Build plan: [docs/MVP_SCOPE.md](../02-Product/MVP_SCOPE.md)
 
 ## Repository
 

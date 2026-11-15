@@ -2,7 +2,7 @@
 
 Pure TypeScript simulation engine: ET0, water balance, thermal, pests, scoring, resilience, Monte Carlo, scenarios, candidates and evidence. No DOM dependencies; runs in a Web Worker and in Node.
 
-Owned by workstream B in [MVP_SCOPE.md §3](../02-Product/MVP_SCOPE.md#3-workstreams-for-parallel-agents). Design: [TECHNICAL_ARCHITECTURE.md §6](../03-Architecture/TECHNICAL_ARCHITECTURE.md#6-simulation-engine).
+Owned by workstream B in [MVP_SCOPE.md §3](../02-Product/MVP_SCOPE.md#3-workstreams-for-parallel-agents). Design: [Architecture docs](../03-Architecture/00-README.md).
 
 Internal package: consumers import TypeScript source directly (`exports` points at `src/index.ts`); the app bundler compiles it.
 
@@ -20,4 +20,4 @@ Internal package: consumers import TypeScript source directly (`exports` points 
 
 Run the performance budgets (not part of `pnpm test`, because coverage instrumentation distorts timing) with `pnpm --filter @itza/engine bench`.
 
-All functions are pure (no DOM, wall clock or locale). Crop parameters come from `@itza/knowledge`. Equations and assumptions: [TECHNICAL_ARCHITECTURE.md §6.2](../03-Architecture/TECHNICAL_ARCHITECTURE.md#62-core-equations).
+All functions are pure (no DOM, wall clock or locale). Crop parameters come from `@itza/knowledge`. Equations and assumptions: [Architecture docs](../03-Architecture/02-Engine/04-core-equations.md#core-equations).

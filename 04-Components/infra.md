@@ -1,6 +1,6 @@
 # Infrastructure
 
-Deployment layout from [TECHNICAL_ARCHITECTURE.md §4.4](../03-Architecture/TECHNICAL_ARCHITECTURE.md#44-hosting-and-compute):
+Deployment layout from [Architecture docs](../03-Architecture/01-System-Overview/03-hosting-and-compute.md#hosting-and-compute):
 
 | Piece | Where | How |
 |---|---|---|

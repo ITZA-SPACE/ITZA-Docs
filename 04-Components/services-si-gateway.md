@@ -1,6 +1,6 @@
 # ITZA SI gateway
 
-Cloudflare Worker between the browser and language-model APIs. It keeps API keys off the client, proxies the LLM, hosts the MCP client for NASA POWER MCP and CMR MCP, validates generated A2UI surfaces against the app catalog and enforces rate limits. See [TECHNICAL_ARCHITECTURE.md §10 and §14](../03-Architecture/TECHNICAL_ARCHITECTURE.md#10-si-assistant).
+Cloudflare Worker between the browser and language-model APIs. It keeps API keys off the client, proxies the LLM, hosts the MCP client for NASA POWER MCP and CMR MCP, validates generated A2UI surfaces against the app catalog and enforces rate limits. See [Architecture docs](../03-Architecture/00-README.md).
 
 Routes:
 

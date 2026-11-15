@@ -2,7 +2,7 @@
 
 Browser data adapters for NASA POWER, ORNL DAAC MODIS, CMR and SoilGrids. Series adapters return canonical series (schema: `schemas/canonical-series.schema.json`) with full provenance taken from the manifest; they never throw on partial data, timeouts or HTTP failures and return gap records instead.
 
-Owned by workstream C in [MVP_SCOPE.md §3](../02-Product/MVP_SCOPE.md#3-workstreams-for-parallel-agents). Design: [TECHNICAL_ARCHITECTURE.md §5](../03-Architecture/TECHNICAL_ARCHITECTURE.md#5-data-layer).
+Owned by workstream C in [MVP_SCOPE.md §3](../02-Product/MVP_SCOPE.md#3-workstreams-for-parallel-agents). Design: [Architecture docs](../03-Architecture/00-README.md).
 
 | Adapter | Source | Returns |
 |---|---|---|
