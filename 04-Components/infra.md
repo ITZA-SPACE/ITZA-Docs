@@ -4,11 +4,13 @@ Deployment layout from [Architecture docs](../03-Architecture/01-System-Overview
 
 | Piece | Where | How |
 |---|---|---|
-| Web app (`apps/web`) | Cloudflare Workers Static Assets | `vite build` output; Cloudflare deploy step added with the first release |
-| SI gateway (`services/si-gateway`) | Cloudflare Worker | `pnpm --filter @itza/si-gateway deploy` |
-| Data & Science API (`services/science-api`) | Team VPS, Docker Compose | `docker-compose.yml` in this folder |
-| Tunnel | Team VPS | `cloudflared` service (profile `tunnel`); no inbound ports open |
-| Batch jobs | NVIDIA Brev | Job scripts go in `infra/brev/`; outputs copied to VPS or repo, then instance stopped |
+| Web app (`apps/web`) | Google Cloud Run service `itza-web` (nginx, port 8080) | `release.yml` on every push to `main` (see below) |
+| Data & Science API (`services/science-api`) | Google Cloud Run service `itza-science-api` (port 8000) | `release.yml` on every push to `main` (see below) |
+| SI gateway (`services/si-gateway`) | Cloudflare Worker `itza-si-gateway` | `pnpm --filter @itza/si-gateway deploy` (manual) |
+| Fallback: Data & Science API on a VPS | Team VPS, Docker Compose | `docker-compose.yml` in this folder, `cloudflared` service (profile `tunnel`); no inbound ports open |
+| Batch jobs | Developer machines; an NVIDIA Brev instance is optional | `pipelines/` (see `pipelines/README.md` and `pipelines/prithvi/brev.sh`); outputs go to the repository or the dataset store |
+
+Cloud Run replaced the Cloudflare static-assets and VPS serving plan ([ADR 013](../03-Architecture/09-Decisions/01-architecture-decision-log.md)).
 
 ## VPS
 

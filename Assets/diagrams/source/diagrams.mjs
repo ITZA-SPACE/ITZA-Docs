@@ -18,7 +18,7 @@ function architecture() {
   // browser internals
   const adapters = c.node("adapters", { x: 700, y: 760, icon: "plug", label: "Browser adapters", sub: "gaps, never errors" });
   const web = c.node("web", { x: 1090, y: 760, icon: "browser", label: "Web app", sub: "React · Map · Charts" });
-  const engine = c.node("engine", { x: 650, y: 1180, icon: "gears", label: "Simulation engine", sub: "Web Worker" });
+  const engine = c.node("engine", { x: 650, y: 1180, icon: "gears", label: "Simulation engine", sub: "Web Worker for\nthe comparison" });
   const cache = c.node("cache", { x: 970, y: 1180, icon: "cache", label: "Offline cache", sub: "IndexedDB +\nservice worker" });
   const hero = c.node("hero", { x: 1290, y: 1180, icon: "json", label: "Hero bundles", sub: "4 demo fields" });
   const assistant = c.node("assistant", { x: 1610, y: 1180, icon: "chat", label: "Visual assistant", sub: "AI SDK + A2UI" });
@@ -30,19 +30,19 @@ function architecture() {
 
   // cloud run
   const itzaweb = c.node("itzaweb", { x: 2330, y: 760, icon: "server", label: "itza-web", sub: "nginx · SPA +\nhero bundles" });
-  const api = c.node("api", { x: 2330, y: 1110, icon: "server", label: "itza-science-api", sub: "FastAPI · 10 routes" });
+  const api = c.node("api", { x: 2330, y: 1110, icon: "server", label: "itza-science-api", sub: "FastAPI · 24 routes" });
   const ml = c.node("ml", { x: 2800, y: 740, icon: "chip", size: 110, arg: "ML", label: "Stress model", sub: "LightGBM · Prithvi" });
-  const store = c.node("store", { x: 2270, y: 1470, icon: "database", label: "Dataset store", sub: "GCS · SMAP + IMERG\nclips (read-only)" });
-  const secrets = c.node("secrets", { x: 2720, y: 1470, icon: "lock", label: "Secret Manager", sub: "Earthdata token" });
+  const store = c.node("store", { x: 2270, y: 1470, icon: "database", label: "Dataset store", sub: "GCS · SMAP, IMERG,\nGRACE, NASADEM clips" });
+  const secrets = c.node("secrets", { x: 2720, y: 1470, icon: "lock", label: "Secret Manager", sub: "Earthdata, OpenET keys" });
   c.group({ x: 2070, y: 540, w: 1010, h: 1130 }, "Google Cloud Run (europe-west1)", { style: "fill" });
 
   // externals right
-  const sat = c.node("sat", { x: 3510, y: 830, icon: "satellite", label: "NASA Earthdata", sub: "IMERG · SMAP · HLS\nGLDAS · NASADEM\nGRACE · GEDI · ECOSTRESS" });
-  const usda = c.node("usda", { x: 3510, y: 1250, icon: "soil", label: "USDA SSURGO", sub: "+ POWER projections\n(NEX-GDDP)" });
+  const sat = c.node("sat", { x: 3510, y: 830, icon: "satellite", label: "NASA Earthdata", sub: "IMERG · SMAP · HLS · GLDAS\nNASADEM · NISAR · GRACE\nGEDI · ECOSTRESS" });
+  const usda = c.node("usda", { x: 3510, y: 1250, icon: "soil", label: "Soil, relief, 2050", sub: "USDA SSURGO · USGS 3DEP\nNAIP · POWER projections" });
 
   // gateway
-  const gateway = c.node("gateway", { x: 1610, y: 1920, icon: "gateway", label: "itza-si-gateway", sub: "chat proxy · allow-list\n20 req/min · 60k tokens" });
-  c.group({ x: 1220, y: 1560, w: 780, h: 600 }, "Cloudflare Workers (edge)", { style: "dash" });
+  const gateway = c.node("gateway", { x: 1610, y: 1920, icon: "gateway", label: "itza-si-gateway", sub: "chat proxy · allow-list\n40 req/min · 400k tokens" });
+  c.group({ x: 1220, y: 1560, w: 780, h: 600 }, "Cloudflare Worker", { style: "dash" });
   const llm = c.node("llm", { x: 2640, y: 1860, icon: "chip", size: 110, label: "LLM providers", sub: "Gemini → Groq (free tier)" });
   const mcp = c.node("mcp", { x: 2640, y: 2110, icon: "globe", size: 100, label: "NASA MCP servers", sub: "POWER · CMR" });
 
@@ -52,7 +52,7 @@ function architecture() {
   c.arrow(c.P(adapters, "r", -20, 14), c.P(web, "l", -20, 14), { label: "series + gaps" });
   c.arrow([1150, web.t - 16], [1310, tiles.b + 16], { label: "map tiles", side: -1 });
   c.arrow(c.P(web, "r", 10), c.P(itzaweb, "l", -10), { label: "load app + hero bundles", n: 3 });
-  c.arrow(c.P(web, "r", 70), c.P(api, "l", -10), { label: "request bundles, zones, ML", n: 4, at: 0.55 });
+  c.arrow(c.P(web, "r", 70), c.P(api, "l", -10), { label: "bundles, zones, relief, ML", n: 4, at: 0.55 });
   c.arrow([web.x - 70, web.b + 14], iconEdge(engine, "t", 0, 18), { label: "replay", n: 5 });
   c.arrow([web.x - 10, web.b + 14], iconEdge(cache, "t", 0, 18), {});
   c.arrow(iconEdge(hero, "t", 0, 18), [web.x + 80, web.b + 14], { label: "demo fields", side: -1 });
@@ -61,8 +61,8 @@ function architecture() {
   c.arrow(c.P(store, "t", 0), c.P(api, "b", -60), { label: "clips" });
   c.arrow(c.P(secrets, "t", -20), c.P(api, "b", 60), { label: "tokens" });
   c.arrow(c.P(api, "r", -20, 16), c.P(sat, "l", -10, 16), { label: "earthaccess (token)", n: 0 });
-  c.arrow(c.P(api, "r", 10, 16), c.P(usda, "l", -20, 16), { label: "soil, projections" });
-  c.arrow(c.P(assistant, "b", 0, 16), c.P(gateway, "t", 0, 16), { label: "chat (streamed)", n: 6, at: 0.62 });
+  c.arrow(c.P(api, "r", 10, 16), c.P(usda, "l", -20, 16), { label: "soil, relief, 2050" });
+  c.arrow(c.P(assistant, "b", 0, 16), c.P(gateway, "t", 0, 16), { label: "chat (streamed)", n: 6, at: 0.3 });
   c.arrow(c.P(gateway, "r", -30), c.P(llm, "l", 0, 16), { label: "LLM calls" });
   c.arrow(c.P(gateway, "r", 30), c.P(mcp, "l", 0, 16), { label: "NASA data tools" });
   return c;
@@ -72,19 +72,19 @@ function architecture() {
 function dataflow() {
   const c = new Canvas(3500, 2020, "ITZA data flow: from NASA and USDA sources to the engine");
   const power = c.node("power", { x: 250, y: 330, icon: "sunCloud", size: 100, label: "NASA POWER", sub: "weather, rain fallback" });
-  const modis = c.node("modis", { x: 630, y: 330, icon: "leaf", size: 100, label: "ORNL MODIS", sub: "NDVI, ET, phenology" });
+  const modis = c.node("modis", { x: 630, y: 330, icon: "leaf", size: 100, label: "ORNL MODIS", sub: "NDVI, ET" });
   const sg = c.node("sg", { x: 440, y: 570, icon: "soil", size: 100, label: "SoilGrids", sub: "global soil (fallback)" });
   c.group({ x: 60, y: 140, w: 760, h: 640 }, "NASA open APIs (no login)", { style: "dash" });
 
   const imerg = c.node("imerg", { x: 250, y: 1180, icon: "rainCloud", size: 100, label: "GPM IMERG", sub: "daily rain" });
   const smap = c.node("smap", { x: 630, y: 1180, icon: "drop", size: 100, label: "SMAP / LDAS", sub: "soil moisture, ET" });
-  const hls = c.node("hls", { x: 250, y: 1430, icon: "satellite", size: 100, label: "HLS", sub: "30 m NDVI" });
+  const hls = c.node("hls", { x: 250, y: 1430, icon: "satellite", size: 100, label: "HLS", sub: "30 m NDVI: zones,\noutlines, frames" });
   const dem = c.node("dem", { x: 630, y: 1430, icon: "mountain", size: 100, label: "NASADEM", sub: "elevation, slope" });
   const ssurgo = c.node("ssurgo", { x: 440, y: 1680, icon: "soil", size: 100, label: "USDA SSURGO", sub: "soil properties" });
-  c.group({ x: 60, y: 1010, w: 760, h: 880 }, "NASA Earthdata + USDA (login)", { style: "dash" });
+  c.group({ x: 60, y: 1010, w: 760, h: 880 }, "NASA Earthdata (login) + USDA soil", { style: "dash" });
 
   const badapt = c.node("badapt", { x: 1340, y: 450, icon: "plug", label: "Browser adapters", sub: "no login · gaps, never errors" });
-  const sapi = c.node("sapi", { x: 1340, y: 1400, icon: "server", label: "Science API adapters", sub: "Earthdata token\nGCS store first" });
+  const sapi = c.node("sapi", { x: 1340, y: 1400, icon: "server", label: "Science API adapters", sub: "Earthdata token\nGCS store first\n+ 2050 factors" });
   const merge = c.node("merge", { x: 2050, y: 930, icon: "merge", label: "Bundle loader", sub: "priority chains\nper-day splice, gaps kept" });
   const hero = c.node("hero", { x: 2050, y: 1650, icon: "json", label: "Hero bundles", sub: "precomputed · static" });
   const bundle = c.node("bundle", { x: 2700, y: 930, icon: "database", size: 140, label: "Field Data Bundle", sub: "13 series · soil · gaps\nprovenance on every series" });
@@ -115,7 +115,7 @@ function engine() {
   const y1 = 600, y2 = 1120;
   const s1 = c.node("s1", { x: X[0], y: y1, icon: "sunCloud", label: "1. Apply scenario", sub: "rain ±30%, +4 °C, 2050" });
   const s2 = c.node("s2", { x: X[1], y: y1, icon: "sun", label: "2. Daily ET0", sub: "FAO-56 Penman-Monteith" });
-  const s3 = c.node("s3", { x: X[2], y: y1, icon: "funnel", label: "3. Candidate rotations", sub: "hard filters, 2–5 seasons\ntop 6 + current" });
+  const s3 = c.node("s3", { x: X[2], y: y1, icon: "funnel", label: "3. Candidate rotations", sub: "hard filters, 2–5 seasons\ntop 4 + current" });
   const s4 = c.node("s4", { x: X[3], y: y1, icon: "calendar", label: "4. Real years", sub: "year n → crop n mod N" });
   const s5 = c.node("s5", { x: X[4], y: y1, icon: "drop", label: "5. Water balance", sub: "rain, runoff, soil water\ncrop stress" });
   const s6 = c.node("s6", { x: X[5], y: y1, icon: "thermometer", label: "6. Other processes", sub: "frost, heat, nitrogen\npests, cover, erosion" });
@@ -157,7 +157,7 @@ function deploy() {
   const run = c.node("run", { x: 3180, y: 680, icon: "server", label: "Cloud Run", sub: "itza-science-api\nitza-web" });
   const lock = c.node("lock", { x: 3390, y: 1130, icon: "lock", label: "Secret Manager", sub: "Earthdata, OpenET keys" });
   c.group({ x: 2250, y: 400, w: 1330, h: 960 }, "Google Cloud (europe-west1)", { style: "dash" });
-  const gcs = c.node("gcs", { x: 290, y: 1110, icon: "database", label: "Dataset store (GCS)", sub: "SMAP + IMERG clips" });
+  const gcs = c.node("gcs", { x: 290, y: 1110, icon: "database", label: "Dataset store (GCS)", sub: "SMAP, IMERG, GRACE,\nNASADEM clips" });
   const wr = c.node("wr", { x: 1000, y: 1110, icon: "terminal", label: "Gateway deploy", sub: "pnpm deploy (manual)" });
   const cf = c.node("cf", { x: 1790, y: 1110, icon: "edge", label: "Cloudflare Worker", sub: "itza-si-gateway" });
   c.group(c.around([cf], 70, 80), "Cloudflare", { style: "dash" });

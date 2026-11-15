@@ -110,7 +110,7 @@ NASA data use: NASA Earth science data are openly available; cite each product w
 | SMAP soil moisture | Root-zone and surface moisture: replay cross-check, Arena, ML features | In use (SPL4SMGP, POWER SMAP archive) |
 | GPM / IMERG precipitation | Daily rain for the water balance | In use (IMERG Final/Late V07) |
 | Landsat | 30 m vegetation index history (via HLS L30, Landsat 8/9) | In use (HLS) |
-| MODIS / VIIRS | NDVI long record, phenology, ET | In use (MOD13Q1, MCD12Q2, MOD16A2GF); VIIRS continuity planned |
+| MODIS / VIIRS | NDVI long record, phenology, ET | In use (MOD13Q1, MOD16A2GF); the MCD12Q2 phenology adapter exists but nothing in the app calls it yet; VIIRS continuity planned |
 | NASA POWER | Weather, ET0 inputs, climatology, 2050 projections, MCP | In use |
 | SRTM elevation | Slope, flow paths, erosion, 3D terrain (NASADEM is NASA's reprocessed SRTM) | In use (NASADEM) |
 | ECOSTRESS | LST and evaporative stress context | In use (L2T LSTE, L4T ESI) |
@@ -134,14 +134,14 @@ Teams are "highly encouraged" to use partner data; listing it in the References 
 | Resource | Coverage | ITZA use / relevance |
 |---|---|---|
 | USDA Cropland Data Layer (CropScape) | US, 30 m, annual | **In use**: proof-field crop-history ground truth (CropScape point service was failing on 2026-11-12) |
-| USDA NRCS SSURGO / STATSGO2, Web Soil Survey | US | Not used; better soil properties than SoilGrids for the US proof field |
-| PRISM (Oregon State) | US | Not used; rainfall/temperature cross-check on the proof field |
-| USDA NASS QuickStats | US county/state | Not used; county yield and acreage history for proof-field calibration |
-| OpenET | Western US (includes Colorado) | Not used; field-scale ET cross-check on the proof field |
-| FAO GAEZ | Global | Not used; crop suitability for the Algerian story region |
+| USDA NRCS SSURGO / STATSGO2, Web Soil Survey | US | **In use** (SSURGO through Soil Data Access, #104): live-bundle soil for US fields, with SoilGrids as the per-property fallback; STATSGO2 and Web Soil Survey not used |
+| PRISM (Oregon State) | US | **In use offline** (#105): seasonal rain cross-check of IMERG on the proof fields, precomputed in `pipelines/validation/` and shown in the validation view |
+| USDA NASS QuickStats | US county/state | **In use offline** (#105): county winter wheat yields compared with replay scores in the validation view (not used for calibration) |
+| OpenET | Western US (includes Colorado) | **In use offline** (#105): monthly ET cross-check of the modeled water use on the proof fields |
+| FAO GAEZ | Global | **In use** (GAEZ v5, CC BY 4.0): advisory crop-suitability evidence on the rotation cards for the Sétif story pack; never a filter |
 | CoCoRaHS | North America | Not used; rain-gauge check of IMERG |
 | USDA AMS Market News | US | Not used; ITZA asks farmers for their own prices (F-25) |
-| NAIP | US, ~1 m | Not used |
+| NAIP | US, ~1 m | Used for the aerial picture on the close-up 3D relief of US fields (#157, `terrain/relief_sources.py`); not used for analysis |
 | USGS NLCD | US, 30 m | Not used |
 | USGS NWIS | US | Not used |
 | USFS LANDFIRE | US | Not used |

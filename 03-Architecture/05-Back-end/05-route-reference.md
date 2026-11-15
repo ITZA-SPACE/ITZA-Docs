@@ -4,7 +4,7 @@ Every HTTP route the science API serves, grouped by resource. One router module 
 
 | Method and path | Module | Purpose |
 |---|---|---|
-| `GET /health` | `health.py` | Liveness and version |
+| `GET /health` | `health.py` | Liveness and version only; upstream services are not probed |
 | `POST /v1/bundles` | `bundles.py` | Start building a Field Data Bundle from a GeoJSON geometry and a period. Returns `{id, status}` |
 | `GET /v1/bundles/{id}` | `bundles.py` | Poll the bundle job until `done` or `error` |
 | `GET /v1/bundles/{id}/series/{var}` | `bundles.py` | One canonical series (precipitation, soil moisture, NDVI) |
@@ -13,19 +13,20 @@ Every HTTP route the science API serves, grouped by resource. One router module 
 | `GET /v1/bundles/{id}/terrain`, `/terrain/{asset}` | `zones.py` | Terrain products for a bundle |
 | `POST /v1/zones` | `zones.py` | Management zones for a field |
 | `POST /v1/relief`, `GET /v1/relief/{field}/{asset}` | `relief.py` | Lidar relief for the 3D twin |
-| `GET /v1/projection` | `projection.py` | Climate change factors for the 2050 view (NASA NEX-GDDP) |
+| `GET /v1/projection` | `projection.py` | Monthly 2041–2060 change factors for the 2050 view, from NASA POWER projections against a precomputed NEX-GDDP baseline |
 | `POST /v1/ml/stress` | `ml.py` | Crop stress inference, with the drivers behind it |
 | `GET /v1/prithvi/{bundle}`, `/rasters/{year}` | `prithvi.py` | Experimental Prithvi crop/fallow classification and rasters |
 | `POST /v1/boundaries` | `boundaries.py` | Start a click-to-field boundary job. Returns 202 |
 | `GET /v1/boundaries/{job}` | `boundaries.py` | Poll the boundary job |
 | `GET /v1/context/grace` | `context.py` | Regional monthly GRACE total water storage |
 | `GET /v1/context/gedi` | `context.py` | Quality-screened GEDI footprints within 2 km |
-| `GET /v1/context/...` (NISAR) | `nisar.py`, `context.py` | NISAR radar snapshots and landscape context |
+| `GET /v1/context/ecostress` | `context.py` | Recent clear-land ECOSTRESS surface temperature and evaporative stress scenes |
+| `GET /v1/nisar` | `nisar.py` | Provisional NISAR soil-moisture snapshots with the same-date SMAP value |
 | `GET /v1/context/assets/{asset}` | `context.py` | Files produced by a context request |
 
 ## How long jobs behave
 
-Bundle building, boundaries and context requests can take longer than one HTTP request should. They are **polled background jobs**: the POST returns an id immediately (or 202), the client polls, and the job's state is `pending`, `done` or `error`. Context endpoints can answer "pending" with retry hints. Because Cloud Run throttles CPU when idle, the science API runs with CPU always on and one instance, so a job keeps running between polls.
+Bundle building, boundaries and context requests can take longer than one HTTP request should. They are **polled background jobs**: the POST returns an id immediately (or 202), the client polls. Bundle jobs move through `queued`, `running`, `done` or `error`; boundary jobs through `running`, `done` or `error`. Context and NISAR routes answer `202` with `Retry-After: 5` while they are still being prepared. Because Cloud Run throttles CPU when idle, the science API runs with CPU always on and one instance, so a job keeps running between polls.
 
 ## Limits
 

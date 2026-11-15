@@ -34,6 +34,6 @@ The core contract: one immutable file with all series, soil, gaps and provenance
 }
 ```
 
-Storage: Parquet for long series (client decodes with a WASM Parquet reader or receives Arrow/JSON chunks), JSON for metadata, PNG/WebP frames for 3D textures, GeoJSON for zones.
+Storage: JSON for bundles and series (the science API serves one series per request at `/v1/bundles/{id}/series/{var}`), PNG frames for 3D textures, GeoTIFF and PNG for terrain layers, PNG height images and JPEG aerial pictures for the relief, GeoJSON for zones. Parquet was considered and is not used.
 
 The bundle, its series and provenance, the engine input/output, the evidence card and the assistant tool I/O are defined as JSON Schemas (draft 2020-12) in `schemas/`, each with an `$id` and a version label. `pnpm schemas:generate` writes TypeScript types to `packages/engine/src/contracts/generated/` (import from `@itza/engine/contracts`) and Pydantic models to `services/science-api/src/itza_science/contracts/`; `pnpm schemas:check` fails when they are stale. A series without provenance, or an evidence card or item missing a mandatory field, fails validation. Change rules: [schemas/README.md](https://github.com/ITZA-SPACE/itza/blob/dev/schemas/README.md).

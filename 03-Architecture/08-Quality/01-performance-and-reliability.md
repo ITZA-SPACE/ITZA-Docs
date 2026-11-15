@@ -24,5 +24,5 @@ The budgets we hold ourselves to and how we watch them.
 
 - **Demo mode:** zero network dependency (bundles, frames, template assistant answers recorded as fallback).
 - **Timeouts and fallbacks:** every adapter has timeout, retry with backoff, and fallback chain; failures become gaps, not crashes.
-- **Health page:** upstream status (POWER, ORNL, CMR, Earthdata, gateway) shown in a hidden diagnostics panel.
+- **Health page:** `/diagnostics` calls the `/health` liveness route of the science API and the gateway. Upstream NASA services are not probed; their failures show as gaps on each field.
 - **Logging:** structured logs in the service; client error boundary with local log export.

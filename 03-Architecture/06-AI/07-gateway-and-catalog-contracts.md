@@ -14,10 +14,10 @@ The exact request, response and answer-catalog shapes.
 | Item | Value |
 |---|---|
 | Endpoint | `POST /chat`, body `{ messages: UIMessage[] }` (user and assistant roles only), header `X-Session-Id`; response is an AI SDK UI message stream |
-| Providers | Gemini free tier, then Groq when the first fails before output; keys only from Wrangler secrets |
+| Providers | Gemini free tier (`gemini-3.1-flash-lite`), then Groq (`openai/gpt-oss-120b`) when the first fails before output; keys only from Wrangler secrets |
 | Server tools | NASA POWER MCP (`power_*`) and CMR MCP (`cmr_*`); results `{ untrusted_data, provenance }`; unreachable server = gap |
 | Client tools | Declared without `execute`; the browser runs them |
-| Limits | 20 req/min per IP; 30 requests and 60k tokens per session; 64 KB body; 40 messages; counters per Worker isolate (best effort) |
+| Limits (`src/budget.ts`, raised in #147) | 40 req/min per IP; 150 requests and 400k tokens per session (one question costs two or three requests); 64 KB body; 40 messages; 1,200 output tokens and 6 steps per request; counters per Worker isolate (best effort, reset on cold start). The web client sends at most the last 36 messages |
 | Error signals | `429 rate_limited` (+ `Retry-After`), `429 budget_exhausted` and `503 no_provider` (both carry `fallback: "templates"`), `413`, `400`, `403` |
 
 ## Answer catalog contract (`packages/ui-kit/catalog`)
