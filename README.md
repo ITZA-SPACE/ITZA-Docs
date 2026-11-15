@@ -63,4 +63,4 @@ node source/diagrams.mjs .
 for f in *.svg; do rsvg-convert -w 1880 "$f" -o "${f%.svg}.png"; done
 ```
 
-They follow the ITZA design system: Familjen Grotesk and DM Sans type, Rain `#7FD0FF` and Space `#2F7BFF` blues, glass panels on the light surface.
+They follow the ITZA design system: Familjen Grotesk and DM Sans type, Rain `#7FD0FF` and Space `#2F7BFF` blues, glass panels on the dark void surface (dark mode only).
