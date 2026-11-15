@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="ITZA: See Earth through time" src="Assets/brand/banner.png" />
+  <img alt="ITZA: See Earth through time" src="Assets/brand/banner-dark.png" />
 </div>
 
 # ITZA Documentation
@@ -14,23 +14,23 @@ Code lives in [`ITZA-SPACE/itza`](https://github.com/ITZA-SPACE/itza). **If a pa
 
 The browser runs the simulation engine in a Web Worker and pulls NASA data through no-login adapters. Cloud Run serves the app and a science API, and a Cloudflare Worker proxies the visual assistant to the LLM providers.
 
-![ITZA system architecture](Assets/diagrams/1-architecture.png)
+![ITZA system architecture](Assets/diagrams/1-architecture-dark.png)
 
 ### Data flow
 
 NASA and USDA sources are merged into one Field Data Bundle, with provenance on every series and gaps kept as gaps.
 
-![ITZA data flow](Assets/diagrams/2-data-flow.png)
+![ITZA data flow](Assets/diagrams/2-data-flow-dark.png)
 
 ### Simulation engine
 
 Eleven seeded, repeatable steps from scenario to ranked rotations. Output is a labelled counterfactual, not measured yield.
 
-![ITZA simulation engine](Assets/diagrams/3-simulation-engine.png)
+![ITZA simulation engine](Assets/diagrams/3-simulation-engine-dark.png)
 
 ### Build and deploy
 
-![ITZA build, data pipelines and deployment](Assets/diagrams/4-build-and-deploy.png)
+![ITZA build, data pipelines and deployment](Assets/diagrams/4-build-and-deploy-dark.png)
 
 ## Start here
 
@@ -60,7 +60,7 @@ The four diagrams are generated from code. To rebuild them:
 ```bash
 cd Assets/diagrams
 node source/diagrams.mjs .
-for f in *.svg; do rsvg-convert -w 1880 "$f" -o "${f%.svg}.png"; done
+for f in *.svg; do rsvg-convert -w 1880 "$f" -o "${f%.svg}-dark.png"; done
 ```
 
 They follow the ITZA design system: Familjen Grotesk and DM Sans type, Rain `#7FD0FF` and Space `#2F7BFF` blues, glass panels on the dark void surface (dark mode only).
