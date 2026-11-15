@@ -10,9 +10,21 @@ Code lives in [`ITZA-SPACE/itza`](https://github.com/ITZA-SPACE/itza). **If a pa
 
 ## At a glance
 
-### System architecture
+### System overview
 
-The browser runs the simulation engine in a Web Worker and pulls NASA data through no-login adapters. Cloud Run serves the app and a science API, and a Cloudflare Worker proxies the visual assistant to the LLM providers.
+The whole system in one view: users, the browser (where the engine runs), Google Cloud, the Cloudflare edge, and the NASA and USDA services it depends on.
+
+![ITZA system overview](Assets/diagrams/tech-overview-dark.png)
+
+### Google Cloud deployment
+
+How code reaches Cloud Run (GitHub Actions, Workload Identity Federation, Artifact Registry), and how the services use Cloud Storage, Secret Manager and service accounts.
+
+![ITZA on Google Cloud](Assets/diagrams/gcp-deployment-dark.png)
+
+### Detailed wiring
+
+Component-level wiring of the same system, kept as a drill-down.
 
 ![ITZA system architecture](Assets/diagrams/1-architecture-dark.png)
 
@@ -61,12 +73,12 @@ Each section has a `00-README.md` index. Every page links back to its index.
 
 ## Diagrams
 
-The four diagrams are generated from code. To rebuild them:
+The six diagrams are generated from code. To rebuild them:
 
 ```bash
 cd Assets/diagrams
-node source/diagrams.mjs .
-for f in *.svg; do rsvg-convert -w 1880 "$f" -o "${f%.svg}-dark.png"; done
+node source/diagrams.mjs . && node source/overview.mjs .
+for f in *.svg; do rsvg-convert -w 2400 "$f" -o "${f%.svg}-dark.png"; done
 ```
 
 They follow the ITZA design system: Familjen Grotesk and DM Sans type, Rain `#7FD0FF` and Space `#2F7BFF` blues, glass panels on the dark void surface (dark mode only).

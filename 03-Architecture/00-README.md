@@ -4,6 +4,10 @@ How the system is built: containers, data layer, simulation engine, ML, assistan
 
 [Back to the docs home](../README.md)
 
+![ITZA system overview](../Assets/diagrams/tech-overview-dark.png)
+
+![ITZA on Google Cloud](../Assets/diagrams/gcp-deployment-dark.png)
+
 ## Pages
 
 - [Technical Architecture](TECHNICAL_ARCHITECTURE.md)
