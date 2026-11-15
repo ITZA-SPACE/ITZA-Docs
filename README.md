@@ -36,28 +36,28 @@ Eleven seeded, repeatable steps from scenario to ranked rotations. Output is a l
 
 | You are | Read this |
 |---|---|
-| A reviewer with 10 minutes | [Solution overview](Overview/SOLUTION_OVERVIEW.md), then [Features](Overview/FEATURES.md) |
-| Checking how it is built | [Technical architecture](Architecture/TECHNICAL_ARCHITECTURE.md) |
-| Checking the science and data | [NASA data sources](Data-Sources/NASA_DATA_SOURCES.md) and the per-dataset reports |
-| Judging against the challenge | [Challenge rules](Challenge/CHALLENGE_RULES_2026.md), [Problem analysis](Overview/PROBLEM_ANALYSIS.md), [Demo strategy](Product/DEMO_STRATEGY.md) |
+| A reviewer with 10 minutes | [Solution overview](01-Overview/SOLUTION_OVERVIEW.md), then [Features](01-Overview/FEATURES.md) |
+| Checking how it is built | [Technical architecture](03-Architecture/TECHNICAL_ARCHITECTURE.md), then [Components](04-Components/00-README.md) |
+| Checking the science and data | [NASA data sources](05-Data-Sources/NASA_DATA_SOURCES.md) and the [dataset reports](05-Data-Sources/00-README.md) |
+| Judging against the challenge | [Challenge rules](08-Challenge-and-Submission/CHALLENGE_RULES_2026.md), [Problem analysis](01-Overview/PROBLEM_ANALYSIS.md), [Demo strategy](02-Product/DEMO_STRATEGY.md) |
+| Contributing | [Repository README](01-Overview/REPOSITORY_README.md), [AGENTS](09-Development/AGENTS.md) |
 
-## Contents
+## Map
 
-| Folder | What is in it |
-|---|---|
-| [Overview](Overview) | Repository README, problem, solution, user journeys, feature list |
-| [Architecture](Architecture) | Full technical architecture |
-| [Product](Product) | PRD, MVP scope and demo strategy |
-| [Components](Components) | One README per package and service: web app, engine, adapters, knowledge packs, UI kit, science API, assistant gateway, schemas, infra, pipelines |
-| [Machine-Learning](Machine-Learning) | Stress model card |
-| [Fixtures](Fixtures) | Test and demo fixture documentation |
-| [Submission](Submission) | Space Apps submission: project page, deck, references, video |
-| [Development](Development) | Contributor and agent guidance (AGENTS, CLAUDE) |
-| [Legal](Legal) | Third-party notices |
-| [Data-Sources](Data-Sources) | NASA data catalogue plus one report per dataset (SMAP, IMERG, HLS, SSURGO, ...) |
-| [Research](Research) | Background research, references, comparison with past Space Apps winners |
-| [Challenge](Challenge) | Challenge rules and eligibility |
-| [Assets](Assets) | Diagrams (PNG, SVG and generator source) and brand files |
+| # | Section | What is in it |
+|---|---|---|
+| 01 | [Overview](01-Overview/00-README.md) | Problem, solution, user journeys, features, repository README |
+| 02 | [Product](02-Product/00-README.md) | PRD, MVP scope, demo strategy |
+| 03 | [Architecture](03-Architecture/00-README.md) | Full technical architecture |
+| 04 | [Components](04-Components/00-README.md) | One page per package and service: web app, engine, adapters, knowledge packs, UI kit, science API, assistant gateway, schemas, infra, pipelines |
+| 05 | [Data sources](05-Data-Sources/00-README.md) | NASA and USDA catalogue, plus a report for each of 27 datasets |
+| 06 | [Machine learning](06-Machine-Learning/00-README.md) | Stress model card |
+| 07 | [Research](07-Research/00-README.md) | Background research, references, past winners comparison |
+| 08 | [Challenge and submission](08-Challenge-and-Submission/00-README.md) | Challenge rules, project page, deck, video |
+| 09 | [Development](09-Development/00-README.md) | AGENTS and CLAUDE guidance, fixtures, third-party notices |
+| | [Assets](Assets) | Diagrams (PNG, SVG, generator source) and brand files |
+
+Each section has a `00-README.md` index. Every page links back to its index.
 
 ## Diagrams
 
